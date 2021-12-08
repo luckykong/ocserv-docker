@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:latest
 MAINTAINER Wyatt Pan <wppurking@gmail.com>
 
 ADD ./certs /opt/certs
@@ -9,6 +9,11 @@ WORKDIR /etc/ocserv
 
 # china timezone
 RUN echo "Asia/Shanghai" > /etc/timezone
+
+# 
+RUN \
+ DEBIAN_FRONTEND=noninteractive apt-get update && \
+ DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
 
 # install compiler, dependencies, tools , dnsmasq
 RUN apt-get update && apt-get install -y \
